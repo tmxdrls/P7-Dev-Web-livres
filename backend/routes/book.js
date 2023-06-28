@@ -10,8 +10,11 @@ const booksCtrl = require('../controllers/book');
 
 router.get('/', booksCtrl.getAllBooks);
 router.post('/', auth, multer, booksCtrl.addBook);
+router.get('/bestrating', booksCtrl.bestRatingBook);
 router.get('/:id', booksCtrl.getOneBook);
 router.put('/:id', auth, multer, booksCtrl.modifyBook);
 router.delete('/:id', auth, booksCtrl.deleteBook);
+router.post('/:id/rating', auth, booksCtrl.ratingBook);
+
 
 module.exports = router;
