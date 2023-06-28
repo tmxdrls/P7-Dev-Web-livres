@@ -1,12 +1,12 @@
-const express = require("express")
+const express = require('express')
 
 const mongoose = require('mongoose')
 
-const booksRoutes = require('./routes/book');
-
 const userRoutes = require('./routes/user');
 
-mongoose.connect("",
+const bodyParser = require('body-parser');
+
+mongoose.connect('mongodb+srv://tmxdrls:owgABd3ksv9f7pKs@cluster0.oea5xok.mongodb.net/',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -24,7 +24,6 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 
-app.use('/api/books', booksRoutes);
 app.use('/api/auth', userRoutes);
 
  module.exports= app;
