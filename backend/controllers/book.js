@@ -48,7 +48,6 @@ const fs = require('fs');
     );
   };
   
-
   exports.addBook = (req, res, next) => {
     const bookObject = JSON.parse(req.body.book);
     delete bookObject._id;

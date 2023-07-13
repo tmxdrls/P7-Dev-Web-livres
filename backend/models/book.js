@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const mongodbErrorHandler = require('mongoose-mongodb-errors')
+
 const bookSchema = mongoose.Schema({
     userId : { type: String, required: true },
     title : { type: String, required: true },
@@ -16,4 +18,6 @@ const bookSchema = mongoose.Schema({
     averageRating : { type: Number, required: true },
     })
   
+    bookSchema.plugin(mongodbErrorHandler);
+    
     module.exports = mongoose.model('Book', bookSchema);
