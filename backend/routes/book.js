@@ -6,6 +6,8 @@ const auth = require('../middleware/auth');
 
 const multer = require('../middleware/multer-config');
 
+const resizeImg = require('../middleware/sharp')
+
 const booksCtrl = require('../controllers/book');
 
 router.get('/', booksCtrl.getAllBooks);

@@ -1,6 +1,6 @@
 const passwordValidator = require('password-validator');
 
-var schema = new passwordValidator();
+const schema = new passwordValidator();
 
 schema
   .is().min(8,"Mot de passe trop court, 8 caractères minimum !")

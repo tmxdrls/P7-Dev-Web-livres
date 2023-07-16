@@ -32,22 +32,6 @@ const fs = require('fs');
     );
   };
 
-  exports.bestRatingBook = (req, res, next) => {
-    Book.find()
-      .sort({averageRating: -1})
-      .limit(3)
-      .then((books) => {
-        res.status(200).json(books);
-      }
-      ).catch(
-        (error) => {
-        res.status(400).json({
-          error: error,
-        });
-      }
-    );
-  };
-  
   exports.addBook = (req, res, next) => {
     const bookObject = JSON.parse(req.body.book);
     delete bookObject._id;
@@ -117,7 +101,7 @@ const fs = require('fs');
 
     if (userRating) {
           res.status(400).json({ error: 'Vous avez déjà noté ce livre' });
-    }else{
+    } else {
 
     book.ratings.push({ userId, grade: rating });
 
@@ -136,3 +120,17 @@ const fs = require('fs');
         });
     }});
  };
+
+ exports.bestRatingBook = (req, res, next) => {
+  Book.find()
+    .sort({averageRating: -1})
+    .limit(3)
+    .then((books) => {
+      res.status(200).json(books);
+    }
+    ).catch(
+      (error) => {
+      res.status(400).json({ error });
+    }
+  );
+};
