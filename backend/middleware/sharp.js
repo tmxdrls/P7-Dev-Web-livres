@@ -1,30 +1,36 @@
-const sharp = require('sharp');
+const sharp = require("sharp");
 
-const fs = require('fs');
+const path = require("path");
 
-const path = require('path');
+const fs = require("fs");
 
-const inputFolderPath = path.join(__dirname, '../images');
-
-const outputFolderPath = path.join(__dirname, '../images-min');
-
-const resizeImage = (inputFilePath, outputFilePath) => {
-  sharp(inputFilePath)
-    .resize({ width: 465 })
-    .toFile(outputFilePath)
-    .then(()=> console.log("Image recadré"));
+const GreenCode = (req, res, next) => {
+  if (req.file) {
+    sharp(req.file.buffer)
+      .resize(465)
+      .webp({ quality: 30 })
+      .toBuffer((error, buffer) => {
+        if (error) {
+          return next(error);
+        }
+        const oldFileName = path
+          .parse(req.file.originalname)
+          .name.split(" ")
+          .join("_");
+        const timestamp = Date.now();
+        const newFilename = `${oldFileName}_${timestamp}.webp`;
+        req.file.filename = newFilename;
+        const savePath = path.join(__dirname, "..", "images", newFilename);
+        fs.writeFile(savePath, buffer, (error) => {
+          if (error) {
+            return next(error);
+          }
+          next();
+        });
+      });
+  } else {
+    next();
+  }
 };
 
-fs.readdir(inputFolderPath, (err, files) => {
-  if (err) {
-    console.error(err);
-  } else {
-    files.forEach((file) => {
-      const inputFilePath = path.join(inputFolderPath, file);
-      const outputFilePath = path.join(outputFolderPath, file);
-      resizeImage(inputFilePath, outputFilePath);
-    });
-  }
-});
-
-
+module.exports = GreenCode;
