@@ -1,21 +1,32 @@
-Pour lancer le projet , merci d'utiliser la ligne de commande et de vous situer sur le dossier concerné. 
+Attention , pour la sécurité de l'application , certaines ressources ne sont pas disponible sur le repo GitHub : 
 
-- Lancement du frontend : npm start 
+- Créez un dossier "images" dans le dossier "backend". Ce dossier contiendra les images publiées par les utilisateurs. 
 
-- Lacement du backend : nodemon server 
+- Ce projet contient des variables d'environnement : Renommez le fichier ".env-exemple" en ".env"
 
-- Ce projet contient des variables d'environnement. Les noms des variables se trouvent dans le fichier ".env-exemple"
+        Dans ce fichier (.env) : La variable DB_URL correspond à l'adresse de la base de données souhaitée.
 
-- Pour se créer un compte , j'ai ajouté un middleware password validator , voici les conditions à respecter pour le mot de passe : 
+                                 La variable JWT_KEY correspond à la clé secrète du token d'authentification. 
+
+        Vous pouvez alors connecter votre base de données et rédiger la clé secrète que vous voulez.
+
+- Pour lancer le projet : Merci d'utiliser la ligne de commande et de vous situer sur le dossier concerné. 
+
+        - Lancement du frontend (dossier frontend) : "npm start" 
+
+        - Lancement du backend (dossier backend) : "npm install" pour installer les dépendances.
+
+                                                   "nodemon server" pour lancer le serveur.
+
+- Pour se créer un compte , j'ai ajouté un middleware password validator , voici la syntaxe à respecter pour le mot de passe : 
 
         - 5 Caractères minimum / 25 maximum.
         - 2 Majuscules minimum.
         - 2 Chiffres minimum.
-        - Pas d'espaces.
-        
+        - Pas d'espace.
 
-- Ce projet contient aussi un middleware Helmet qui interfère avec les CORS j'ai rajouté :
+- Ce projet contient aussi un middleware "Helmet" dans mon app.js qui interfère avec les CORS , j'ai rajouté :
 
-"res.setHeader('Cross-Origin-Resource-Policy','same-site')" Afin que les images puissent être lu. 
+        "res.setHeader('Cross-Origin-Resource-Policy','same-site')" Afin que les images puissent être lues. 
 
 

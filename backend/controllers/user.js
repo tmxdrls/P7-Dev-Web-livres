@@ -6,7 +6,7 @@ const User = require ('../models/user')
 
 require('dotenv').config()
 
-const secretKey = process.env.JWD_KEY
+const secretKey = process.env.JWT_KEY
 
 exports.signup = (req, res, next) => {
         bcrypt.hash(req.body.password, 10)
